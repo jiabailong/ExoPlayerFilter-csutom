@@ -114,8 +114,8 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
 
 
 //        framebufferObject.enable();
-//        GLES20.glClear(GL_COLOR_BUFFER_BIT);
-        glGrayScaleFilter.draw(framebufferObject.getTexName(), framebufferObject);
+        GLES20.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//        glGrayScaleFilter.draw(framebufferObject.getTexName(), framebufferObject);
 
         glGaussianBlurFilter.draw(framebufferObject.getTexName(), null);
 

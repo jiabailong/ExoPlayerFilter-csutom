@@ -28,7 +28,7 @@ public class GlVignetteFilter extends GlFilter {
     private float vignetteCenterX = 0.5f;
     private float vignetteCenterY = 0.5f;
     private float vignetteStart = 0.2f;
-    private float vignetteEnd = 0.85f;
+    private float vignetteEnd = 1.25f;
 
     public GlVignetteFilter() {
         super(DEFAULT_VERTEX_SHADER, FRAGMENT_SHADER);

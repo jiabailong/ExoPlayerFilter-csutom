@@ -85,7 +85,7 @@ class EPlayerRenderer extends EFrameBufferObjectRenderer implements SurfaceTextu
 
     @Override
     public void onSurfaceCreated(final EGLConfig config) {
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
         final int[] args = new int[1];
 

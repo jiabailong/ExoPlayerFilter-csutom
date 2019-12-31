@@ -24,78 +24,80 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
     protected Resolution inputResolution = new Resolution(1280, 720);
 
     public GlOverlayFilter() {
-        super(DEFAULT_VERTEX_SHADER, FRAGMENT_SHADER);
+        super(VERTEX_SHADER, FRAGMENT_SHADER);
     }
 
-    private final static String FRAGMENT_SHADER =
-            "precision mediump float;\n" +
-                    "varying vec2 vTextureCoord;\n" +
-                    "uniform lowp sampler2D sTexture;\n" +
-                    "uniform lowp sampler2D oTexture;\n" +
-                    "void main() {\n" +
-                    "   lowp vec4 textureColor = texture2D(sTexture, vTextureCoord);\n" +
-                    "   lowp vec4 textureColor2 = texture2D(oTexture, vTextureCoord);\n" +
-                    "   \n" +
-                    "   gl_FragColor = mix(textureColor, textureColor2, textureColor2.a);\n" +
-                    "}\n";
-
-//    private static final String VERTEX_SHADER =
-//            "attribute vec4 aPosition;" +
-//                    "attribute vec4 aTextureCoord;" +
-//
-//                    "const lowp int GAUSSIAN_SAMPLES = 9;" +
-//
-//                    "uniform highp float texelWidthOffset;" +
-//                    "uniform highp float texelHeightOffset;" +
-//                    "uniform highp float blurSize;" +
-//
-//                    "varying highp vec2 blurCoordinates[GAUSSIAN_SAMPLES];" +
-//
-//                    "void main() {" +
-//                    "gl_Position = aPosition;" +
-//                    "highp vec2 vTextureCoord = aTextureCoord.xy;" +
-//
-//                    // Calculate the positions for the blur
-//                    "int multiplier = 0;" +
-//                    "highp vec2 blurStep;" +
-//                    "highp vec2 singleStepOffset = vec2(texelHeightOffset, texelWidthOffset) * blurSize;" +
-//
-//                    "for (lowp int i = 0; i < GAUSSIAN_SAMPLES; i++) {" +
-//                    "multiplier = (i - ((GAUSSIAN_SAMPLES - 1) / 2));" +
-//                    // Blur in x (horizontal)
-//                    "blurStep = float(multiplier) * singleStepOffset;" +
-//                    "blurCoordinates[i] = vTextureCoord.xy + blurStep;" +
-//                    "}" +
-//                    "}";
-//
-//    private static final String FRAGMENT_SHADER =
-//            "precision mediump float;" +
-//                    "uniform lowp sampler2D oTexture;\n" +
-//                    "const lowp int GAUSSIAN_SAMPLES = 9;" +
-//                    "varying highp vec2 blurCoordinates[GAUSSIAN_SAMPLES];" +
+//    private final static String FRAGMENT_SHADER =
+//            "precision mediump float;\n" +
 //                    "varying vec2 vTextureCoord;\n" +
-//                    "uniform lowp sampler2D ssTexture;\n" +
-//                    "uniform lowp sampler2D sTexture;" +
-//
-//                    "void main() {" +
-//                    "   lowp vec4 textureColor = texture2D(ssTexture, vTextureCoord);\n" +
+//                    "uniform lowp sampler2D sTexture;\n" +
+//                    "uniform lowp sampler2D oTexture;\n" +
+//                    "void main() {\n" +
+//                    "   lowp vec4 textureColor = texture2D(sTexture, vTextureCoord);\n" +
 //                    "   lowp vec4 textureColor2 = texture2D(oTexture, vTextureCoord);\n" +
 //                    "   \n" +
-//                    "   lowp vec4 textureColor3 = mix(textureColor, textureColor2, textureColor2.a);\n" +
-//
-//                    "lowp vec4 sum = textureColor3;" +
-//
-//                    "sum += texture2D(sTexture, blurCoordinates[0]) * 0.05;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[1]) * 0.09;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[2]) * 0.12;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[3]) * 0.15;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[4]) * 0.18;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[5]) * 0.15;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[6]) * 0.12;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[7]) * 0.09;" +
-//                    "sum += texture2D(sTexture, blurCoordinates[8]) * 0.05;" +
-//                    "gl_FragColor = sum;" +
-//                    "}";
+//                    "   gl_FragColor = mix(textureColor, textureColor2, textureColor2.a);\n" +
+//                    "}\n";
+
+    private static final String VERTEX_SHADER =
+            "attribute vec4 aPosition;" +
+                    "attribute vec4 aTextureCoord;" +
+
+                    "const lowp int GAUSSIAN_SAMPLES = 9;" +
+
+                    "uniform highp float texelWidthOffset;" +
+                    "uniform highp float texelHeightOffset;" +
+                    "uniform highp float blurSize;" +
+
+                    "varying highp vec2 blurCoordinates[GAUSSIAN_SAMPLES];" +
+
+                    "void main() {" +
+                    "gl_Position = aPosition;" +
+                    "highp vec2 vTextureCoord = aTextureCoord.xy;" +
+
+                    // Calculate the positions for the blur
+                    "int multiplier = 0;" +
+                    "highp vec2 blurStep;" +
+                    "highp vec2 singleStepOffset = vec2(texelHeightOffset, texelWidthOffset) * blurSize;" +
+
+                    "for (lowp int i = 0; i < GAUSSIAN_SAMPLES; i++) {" +
+                    "multiplier = (i - ((GAUSSIAN_SAMPLES - 1) / 2));" +
+                    // Blur in x (horizontal)
+                    "blurStep = float(multiplier) * singleStepOffset;" +
+                    "blurCoordinates[i] = vTextureCoord.xy + blurStep;" +
+                    "}" +
+                    "}";
+
+    private static final String FRAGMENT_SHADER =
+            "precision mediump float;" +
+                    "uniform lowp sampler2D oTexture;\n" +
+                    "const lowp int GAUSSIAN_SAMPLES = 9;" +
+                    "varying highp vec2 blurCoordinates[GAUSSIAN_SAMPLES];" +
+                    "varying vec2 vTextureCoord;\n" +
+                    "uniform lowp sampler2D ssTexture;\n" +
+                    "uniform lowp sampler2D sTexture;" +
+
+                    "void main() {" +
+                    "   lowp vec4 textureColor = texture2D(sTexture, vTextureCoord);\n" +
+                    "   lowp vec4 textureColor2 = texture2D(oTexture, vTextureCoord);\n" +
+//                    "   \n" +
+//                    "   gl_FragColor = mix(textureColor, textureColor2, textureColor2.a);\n" +
+
+                    "lowp vec4 sum = vec4(0.0);" +
+
+                    "sum += texture2D(sTexture, blurCoordinates[0]) * 0.05;" +
+                    "sum += texture2D(sTexture, blurCoordinates[1]) * 0.09;" +
+                    "sum += texture2D(sTexture, blurCoordinates[2]) * 0.12;" +
+                    "sum += texture2D(sTexture, blurCoordinates[3]) * 0.15;" +
+                    "sum += texture2D(sTexture, blurCoordinates[4]) * 0.18;" +
+                    "sum += texture2D(sTexture, blurCoordinates[5]) * 0.15;" +
+                    "sum += texture2D(sTexture, blurCoordinates[6]) * 0.12;" +
+                    "sum += texture2D(sTexture, blurCoordinates[7]) * 0.09;" +
+                    "sum += texture2D(sTexture, blurCoordinates[8]) * 0.05;" +
+//                    "   lowp vec4 textureColor3 = mix(textureColor2, sum, sum.a);\n" +
+
+                    "gl_FragColor = sum;" +
+                    "}";
 
     public void setResolution(Resolution resolution) {
         this.inputResolution = resolution;
@@ -127,33 +129,33 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
     }
     private float texelWidthOffset = 0.01f;
     private float texelHeightOffset = 0.01f;
-    private float blurSize = 0.7f;
+    private float blurSize = 0.2f;
     @Override
     public void onDraw() {
-//        GLES20.glUniform1f(getHandle("texelWidthOffset"), texelWidthOffset);
-//        GLES20.glUniform1f(getHandle("texelHeightOffset"), texelHeightOffset);
-//        GLES20.glUniform1f(getHandle("blurSize"), blurSize);
+        GLES20.glUniform1f(getHandle("texelWidthOffset"), texelWidthOffset);
+        GLES20.glUniform1f(getHandle("texelHeightOffset"), texelHeightOffset);
+        GLES20.glUniform1f(getHandle("blurSize"), blurSize);
         if (bitmap == null) {
             createBitmap();
         }
         if (bitmap.getWidth() != inputResolution.width() || bitmap.getHeight() != inputResolution.height()) {
             createBitmap();
         }
-
-        bitmap.eraseColor(Color.argb(0, 0, 0, 0));
-        Canvas bitmapCanvas = new Canvas(bitmap);
-        bitmapCanvas.scale(1, -1, bitmapCanvas.getWidth() / 2, bitmapCanvas.getHeight() / 2);
-        drawCanvas(bitmapCanvas);
-
+//
+        bitmap.eraseColor(Color.argb(90, 80, 80, 80));
+//        Canvas bitmapCanvas = new Canvas(bitmap);
+//        bitmapCanvas.scale(1, -1, bitmapCanvas.getWidth() / 2, bitmapCanvas.getHeight() / 2);
+//        drawCanvas(bitmapCanvas);
+//
         int offsetDepthMapTextureUniform = getHandle("oTexture");// 3
-
+//
         GLES20.glActiveTexture(GLES20.GL_TEXTURE3);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
-
+//
         if (bitmap != null && !bitmap.isRecycled()) {
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap, 0);
         }
-
+//
         GLES20.glUniform1i(offsetDepthMapTextureUniform, 3);
 
 
