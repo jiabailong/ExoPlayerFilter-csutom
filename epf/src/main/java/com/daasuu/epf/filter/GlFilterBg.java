@@ -44,10 +44,10 @@ public class GlFilterBg {
 
     private static final float[] VERTICES_DATA = new float[]{
             // X, Y, Z, U, V
-            -1.2f, 1.4f, 0.0f, 0.0f, 1.0f,
-            1.2f, 1.4f, 0.0f, 1.0f, 1.0f,
-            -1.2f, -1.4f, 0.0f, 0.0f, 0.0f,
-            1.2f, -1.4f, 0.0f, 1.0f, 0.0f
+            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+            1.0f, -1.0f, 0.0f, 1.0f, 0.0f
     };
 
     private static final int FLOAT_SIZE_BYTES = 4;
