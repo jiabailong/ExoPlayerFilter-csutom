@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.Surface;
 
 import com.daasuu.epf.filter.GlFilter;
-import com.daasuu.epf.filter.GlGaussianBlurFilter;
-import com.daasuu.epf.filter.GlLookUpTableFilter;
 import com.daasuu.epf.filter.GlPreviewFilter;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
@@ -65,9 +63,6 @@ class EPlayerRenderer extends EFrameBufferObjectRenderer implements SurfaceTextu
             public void run() {
                 if (glFilter != null) {
                     glFilter.release();
-                    if (glFilter instanceof GlLookUpTableFilter) {
-                        ((GlLookUpTableFilter) glFilter).releaseLutBitmap();
-                    }
                     glFilter = null;
                 }
                 glFilter = filter;

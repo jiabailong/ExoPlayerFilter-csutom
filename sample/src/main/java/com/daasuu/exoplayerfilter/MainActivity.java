@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.daasuu.epf.EPlayerView;
+import com.daasuu.epf.filter.GlFilter;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -104,16 +105,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // list
-        ListView listView = (ListView) findViewById(R.id.list);
-        final List<FilterType> filterTypes = FilterType.createFilterList();
-        listView.setAdapter(new FilterAdapter(this, R.layout.row_text, filterTypes));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ePlayerView.setGlFilter(FilterType.createGlFilter(filterTypes.get(position), getApplicationContext()));
-            }
-        });
+//        // list
+//        ListView listView = (ListView) findViewById(R.id.list);
+//        final List<FilterType> filterTypes = FilterType.createFilterList();
+//        listView.setAdapter(new FilterAdapter(this, R.layout.row_text, filterTypes));
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                ePlayerView.setGlFilter(FilterType.createGlFilter(filterTypes.get(position), getApplicationContext()));
+//            }
+//        });
     }
 
 
@@ -138,52 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUoGlPlayerView() {
         ePlayerView = new EPlayerView(this);
-//        case DEFAULT:
-//        case BILATERAL_BLUR:
-//        case BOX_BLUR:
-//        case BRIGHTNESS:
-//        case BULGE_DISTORTION:
-//        case CGA_COLORSPACE:
-//        case CONTRAST:
-//        case CROSSHATCH:
-//        case EXPOSURE:
-//        case FILTER_GROUP_SAMPLE:
-//        case GAMMA:
-//        case GAUSSIAN_FILTER:
-//        case GRAY_SCALE:
-//        case HALFTONE:
-//        case HAZE:
-//        case HIGHLIGHT_SHADOW:
-//        case HUE:
-//        case INVERT:
-//        case LOOK_UP_TABLE_SAMPLE:
-//        case LUMINANCE:
-//        case LUMINANCE_THRESHOLD:
-//        case MONOCHROME:
-//        case OPACITY:
-//        case PIXELATION:
-//        case POSTERIZE:
-//        case RGB:
-//        case SATURATION:
-//        case SEPIA:
-//        case SHARP:
-//        case SOLARIZE:
-//        case SPHERE_REFRACTION:
-//        case SWIRL:
-//        case TONE_CURVE_SAMPLE:
-//        case TONE:
-//        case VIBRANCE:
-//        case VIGNETTE:
-//        case WATERMARK:
-//        case WEAK_PIXEL:
-//        case WHITE_BALANCE:
-//        case ZOOM_BLUR:
-//        case BITMAP_OVERLAY_SAMPLE:
-
-
-//        GAUSSIAN_FILTER高斯
-//        ZOOM_BLUR 时光虫洞效果
-        ePlayerView.setGlFilter(FilterType.createGlFilter(FilterType.DEFAULT, getApplicationContext()));
+        ePlayerView.setGlFilter(new GlFilter());
         ePlayerView.setSimpleExoPlayer(player);
         ePlayerView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ((MovieWrapperView) findViewById(R.id.layout_movie_wrapper)).addView(ePlayerView);

@@ -72,13 +72,8 @@ public class GlGaussianBlurFilter extends GlFilterBg {
     private float texelWidthOffset = 0.01f;
     private float texelHeightOffset = 0.01f;
     private float blurSize = 0.3f;
-    private int[] textures = new int[1];
-    Bitmap bmp;
     public GlGaussianBlurFilter() {
         super(VERTEX_SHADER, FRAGMENT_SHADER);
-         bmp=Bitmap.createBitmap(1000,1000, Bitmap.Config.ARGB_8888);
-        Canvas canvas=new Canvas(bmp);
-        canvas.drawColor(Color.parseColor("#cd000000"));
     }
 
     public float getTexelWidthOffset() {

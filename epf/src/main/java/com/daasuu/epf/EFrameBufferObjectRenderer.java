@@ -102,24 +102,10 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
         GLES20.glBindFramebuffer(GL_FRAMEBUFFER, 0);
         GLES20.glViewport(0, 0, framebufferObject.getWidth(), framebufferObject.getHeight());
 
-//        GLES20.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        glFilterZoom.draw(framebufferObject.getTexName(), null);
-
-
-
-//
-//        GLES20.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        GLES20.glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//        GLES20.glViewport(0, 0, framebufferObject.getWidth(), framebufferObject.getHeight());
-
-
-//        framebufferObject.enable();
         GLES20.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glGrayScaleFilter.draw(framebufferObject.getTexName(), framebufferObject);
-//
-//        glGaussianBlurFilter.draw(framebufferObject.getTexName(), null);
-
         glFilterZoom.draw(framebufferObject.getTexName(), null);
+//        normalShader.draw(framebufferObject.getTexName(), null); //
 
 
 
