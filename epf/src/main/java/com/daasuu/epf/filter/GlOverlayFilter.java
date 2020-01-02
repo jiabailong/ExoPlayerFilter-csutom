@@ -42,8 +42,8 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
     private static final String VERTEX_SHADER =
             "attribute vec4 aPosition;" +
                     "attribute vec4 aTextureCoord;" +
-
                     "const lowp int GAUSSIAN_SAMPLES = 9;" +
+                    "varying highp vec2 vTextureCoord;\n" +
 
                     "uniform highp float texelWidthOffset;" +
                     "uniform highp float texelHeightOffset;" +
@@ -74,13 +74,10 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
                     "const lowp int GAUSSIAN_SAMPLES = 9;" +
                     "varying highp vec2 blurCoordinates[GAUSSIAN_SAMPLES];" +
                     "varying vec2 vTextureCoord;\n" +
-                    "uniform lowp sampler2D ssTexture;\n" +
                     "uniform lowp sampler2D sTexture;" +
-                    "uniform lowp sampler2D ddTexture;" +
 
                     "void main() {" +
-                    "   lowp vec4 textureColor = texture2D(ssTexture, vTextureCoord);\n" +
-//                    "   \n" +
+                    "   lowp vec4 textureColor = texture2D(oTexture, vTextureCoord);\n" +
 
                     "lowp vec4 sum = vec4(0.0);" +
 
@@ -103,6 +100,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
     public void setResolution(Resolution resolution) {
         this.inputResolution = resolution;
     }
+//2020-01-02 18:49:40.977 7307-7338/? I/Adreno: Error: input vTextureCoord not declared in output from previous stage.
 
     @Override
     public void setFrameSize(int width, int height) {
@@ -148,16 +146,16 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
         bitmapCanvas.scale(1, -1, bitmapCanvas.getWidth() / 2, bitmapCanvas.getHeight() / 2);
         drawCanvas(bitmapCanvas);
 //
-        int offsetDepthMapTextureUniform = getHandle("ssTexture");// 3
+//        int offsetDepthMapTextureUniform = getHandle("oTexture");// 3
 //
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE4);
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE3);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
 //
         if (bitmap != null && !bitmap.isRecycled()) {
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap, 0);
         }
 //
-        GLES20.glUniform1i(offsetDepthMapTextureUniform, 4);
+//        GLES20.glUniform1i(offsetDepthMapTextureUniform, 3);
 
 
     }

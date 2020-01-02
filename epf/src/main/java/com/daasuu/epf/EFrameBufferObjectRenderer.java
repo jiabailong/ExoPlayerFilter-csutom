@@ -59,7 +59,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
 
         glGrayScaleFilter = new GlColorOverlaySample();;
         normalShader.setup();
-        glGaussianBlurFilter.setup();
+//        glGaussianBlurFilter.setup();
         glFilterZoom.setup();
         glGrayScaleFilter.setup();
         onSurfaceCreated(config);
@@ -104,6 +104,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
 
         GLES20.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glGrayScaleFilter.draw(framebufferObject.getTexName(), framebufferObject);
+//        glGaussianBlurFilter.draw(framebufferObject.getTexName(), framebufferObject);
         glFilterZoom.draw(framebufferObject.getTexName(), null);
 //        normalShader.draw(framebufferObject.getTexName(), null); //
 

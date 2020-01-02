@@ -119,6 +119,7 @@ public class GlFilterBg2 {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texName);
         GLES20.glUniform1i(getHandle("sTexture"), 0);
+//        GLES20.glUniform1i(getHandle("oTexture"), 0);
 
         onDraw();
 
