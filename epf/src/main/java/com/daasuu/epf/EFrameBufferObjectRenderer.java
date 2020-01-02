@@ -74,7 +74,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
         Bitmap bmp=Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         Bitmap bmp2=null;
         Canvas canvas=new Canvas(bmp);
-        canvas.drawColor(Color.parseColor("#70000000"));
+        canvas.drawColor(Color.parseColor("#000000"));
         // bmp.recycle();
         glGrayScaleFilter.setBitmap(bmp);
         glGrayScaleFilter.setFrameSize(width, height);
@@ -115,9 +115,9 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
 
 //        framebufferObject.enable();
         GLES20.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        glGrayScaleFilter.draw(framebufferObject.getTexName(), framebufferObject);
-
-        glGaussianBlurFilter.draw(framebufferObject.getTexName(), null);
+        glGrayScaleFilter.draw(framebufferObject.getTexName(), framebufferObject);
+//
+//        glGaussianBlurFilter.draw(framebufferObject.getTexName(), null);
 
         glFilterZoom.draw(framebufferObject.getTexName(), null);
 

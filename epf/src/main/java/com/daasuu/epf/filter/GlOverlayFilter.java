@@ -76,12 +76,11 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
                     "varying vec2 vTextureCoord;\n" +
                     "uniform lowp sampler2D ssTexture;\n" +
                     "uniform lowp sampler2D sTexture;" +
+                    "uniform lowp sampler2D ddTexture;" +
 
                     "void main() {" +
-                    "   lowp vec4 textureColor = texture2D(sTexture, vTextureCoord);\n" +
-                    "   lowp vec4 textureColor2 = texture2D(oTexture, vTextureCoord);\n" +
+                    "   lowp vec4 textureColor = texture2D(ssTexture, vTextureCoord);\n" +
 //                    "   \n" +
-//                    "   gl_FragColor = mix(textureColor, textureColor2, textureColor2.a);\n" +
 
                     "lowp vec4 sum = vec4(0.0);" +
 
@@ -95,8 +94,10 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
                     "sum += texture2D(sTexture, blurCoordinates[7]) * 0.09;" +
                     "sum += texture2D(sTexture, blurCoordinates[8]) * 0.05;" +
 //                    "   lowp vec4 textureColor3 = mix(textureColor2, sum, sum.a);\n" +
-
-                    "gl_FragColor = sum;" +
+//                    "   lowp vec4 textureColor2 = texture2D(ddTexture, sum);\n" +
+                    "   gl_FragColor = mix(sum, textureColor, 0.7f);\n" +
+//
+//                    "gl_FragColor = sum;" +
                     "}";
 
     public void setResolution(Resolution resolution) {
@@ -129,7 +130,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
     }
     private float texelWidthOffset = 0.01f;
     private float texelHeightOffset = 0.01f;
-    private float blurSize = 0.2f;
+    private float blurSize = 0.3f;
     @Override
     public void onDraw() {
         GLES20.glUniform1f(getHandle("texelWidthOffset"), texelWidthOffset);
@@ -143,20 +144,20 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
         }
 //
         bitmap.eraseColor(Color.argb(90, 80, 80, 80));
-//        Canvas bitmapCanvas = new Canvas(bitmap);
-//        bitmapCanvas.scale(1, -1, bitmapCanvas.getWidth() / 2, bitmapCanvas.getHeight() / 2);
-//        drawCanvas(bitmapCanvas);
+        Canvas bitmapCanvas = new Canvas(bitmap);
+        bitmapCanvas.scale(1, -1, bitmapCanvas.getWidth() / 2, bitmapCanvas.getHeight() / 2);
+        drawCanvas(bitmapCanvas);
 //
-        int offsetDepthMapTextureUniform = getHandle("oTexture");// 3
+        int offsetDepthMapTextureUniform = getHandle("ssTexture");// 3
 //
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE3);
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE4);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
 //
         if (bitmap != null && !bitmap.isRecycled()) {
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap, 0);
         }
 //
-        GLES20.glUniform1i(offsetDepthMapTextureUniform, 3);
+        GLES20.glUniform1i(offsetDepthMapTextureUniform, 4);
 
 
     }

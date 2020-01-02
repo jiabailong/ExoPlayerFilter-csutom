@@ -39,10 +39,6 @@ public class GlFilterBg2 {
                     "uniform lowp sampler2D sTexture;\n" +
                     "void main() {\n" +
                     "gl_FragColor = texture2D(sTexture, vTextureCoord);\n" +
-                    "gl_FragColor.r=0;\n" +
-                    "gl_FragColor.g=0;\n" +
-                    "gl_FragColor.b=0;\n" +
-                    "gl_FragColor.a=60;\n" +
                     "}\n";
 
 
