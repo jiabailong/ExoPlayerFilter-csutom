@@ -37,7 +37,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
     private EFramebufferObject framebufferObject;
     private GlFilter normalShader;
     private GlFilterZoom glFilterZoom;
-    private GlGaussianBlurFilter glGaussianBlurFilter;
+//    private GlGaussianBlurFilter glGaussianBlurFilter;
     private GlColorOverlaySample glGrayScaleFilter;
 //                return new GlBitmapOverlaySample(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher_round));
 
@@ -55,7 +55,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
 
         normalShader = new GlFilter();
         glFilterZoom = new GlFilterZoom();
-        glGaussianBlurFilter=new GlGaussianBlurFilter();
+//        glGaussianBlurFilter=new GlGaussianBlurFilter();
 
         glGrayScaleFilter = new GlColorOverlaySample();;
         normalShader.setup();
@@ -69,7 +69,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
     public final void onSurfaceChanged(final GL10 gl, final int width, final int height) {
         framebufferObject.setup(width, height);
         normalShader.setFrameSize(width, height);
-        glGaussianBlurFilter.setFrameSize(width, height);
+//        glGaussianBlurFilter.setFrameSize(width, height);
         glFilterZoom.setFrameSize(width, height);
         Bitmap bmp=Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         Bitmap bmp2=null;

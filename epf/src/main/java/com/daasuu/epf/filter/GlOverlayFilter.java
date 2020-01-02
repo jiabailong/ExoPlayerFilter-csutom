@@ -80,6 +80,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
                     "   lowp vec4 textureColor = texture2D(oTexture, vTextureCoord);\n" +
 
                     "lowp vec4 sum = vec4(0.0);" +
+                    "lowp vec4 sdd = vec4(0.5);" +
 
                     "sum += texture2D(sTexture, blurCoordinates[0]) * 0.05;" +
                     "sum += texture2D(sTexture, blurCoordinates[1]) * 0.09;" +
@@ -92,7 +93,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
                     "sum += texture2D(sTexture, blurCoordinates[8]) * 0.05;" +
 //                    "   lowp vec4 textureColor3 = mix(textureColor2, sum, sum.a);\n" +
 //                    "   lowp vec4 textureColor2 = texture2D(ddTexture, sum);\n" +
-                    "   gl_FragColor = mix(sum, textureColor, 0.7f);\n" +
+                    "   gl_FragColor = mix(sum, textureColor, 0.5f);\n" +
 //
 //                    "gl_FragColor = sum;" +
                     "}";
@@ -146,7 +147,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
         bitmapCanvas.scale(1, -1, bitmapCanvas.getWidth() / 2, bitmapCanvas.getHeight() / 2);
         drawCanvas(bitmapCanvas);
 //
-//        int offsetDepthMapTextureUniform = getHandle("oTexture");// 3
+        int offsetDepthMapTextureUniform = getHandle("oTexture");// 3
 //
         GLES20.glActiveTexture(GLES20.GL_TEXTURE3);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
@@ -155,7 +156,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap, 0);
         }
 //
-//        GLES20.glUniform1i(offsetDepthMapTextureUniform, 3);
+        GLES20.glUniform1i(offsetDepthMapTextureUniform, 3);
 
 
     }
