@@ -93,7 +93,7 @@ public abstract class GlOverlayFilter extends GlFilterBg2 {
                     "sum += texture2D(sTexture, blurCoordinates[8]) * 0.05;" +
 //                    "   lowp vec4 textureColor3 = mix(textureColor2, sum, sum.a);\n" +
 //                    "   lowp vec4 textureColor2 = texture2D(ddTexture, sum);\n" +
-                    "   gl_FragColor = mix(sum, textureColor, 0.5f);\n" +
+                    "   gl_FragColor = mix(sum, textureColor, textureColor.a);\n" +
 //
 //                    "gl_FragColor = sum;" +
                     "}";

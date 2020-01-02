@@ -74,7 +74,7 @@ abstract class EFrameBufferObjectRenderer implements GLSurfaceView.Renderer {
         Bitmap bmp=Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         Bitmap bmp2=null;
         Canvas canvas=new Canvas(bmp);
-        canvas.drawColor(Color.parseColor("#000000"));
+        canvas.drawColor(Color.parseColor("#80000000"));
         // bmp.recycle();
         glGrayScaleFilter.setBitmap(bmp);
         glGrayScaleFilter.setFrameSize(width, height);
